@@ -1,8 +1,8 @@
 
  &param0
- nx           =      60,
- ny           =      60,
- nz           =      40,
+ nx           =      800,
+ ny           =      800,
+ nz           =      144,
  ppnode       =     128,
  timeformat   =       2,
  timestats    =       1,
@@ -12,24 +12,24 @@
  /
 
  &param1
- dx     =  2000.0,
- dy     =  2000.0,
- dz     =   500.0,
- dtl    =   7.500,
- timax  =  7200.0,
+ dx     =  125.0,
+ dy     =  125.0,
+ dz     =   125.0,
+ dtl    =   2,
+ timax  =  1200.0,
  run_time =  -999.9,
- tapfrq =   900.0,
- rstfrq = -3600.0,
- statfrq =   60.0,
+ tapfrq =   600.0,
+ rstfrq = 600.0,
+ statfrq = 2400.0,
  prclfrq =   60.0,
- hailfrq =   60.0,
+ hailfrq =   10.0,
  /
 
  &param2
  cm1setup  =  1,
  testcase  =  0,
  adapt_dt  =  0,
- irst      =  0,
+ irst      =  1,
  rstnum    =  1,
  iconly    =  0,
  hadvordrs =  5,
@@ -53,7 +53,7 @@
  irdamp    =  1,
  hrdamp    =  0,
  psolver   =  3,
- ptype     =  5,
+ ptype     =  27,
  ihail     =  1,
  iautoc    =  1,
  cuparam   =  0,
@@ -87,8 +87,8 @@
  pdtra     =  1,
  iprcl     =  0,
  nparcels  =  1,
- ihailtraj = 0,
- nhailtrajs = 1,
+ ihailtraj = 1,
+ nhailtrajs = 505760,
  /
 
  &param3
@@ -101,8 +101,8 @@
  zd      = 15000.0,
  xhd     = 100000.0,
  alphobc = 60.0,
- umove   = 12.5,
- vmove   =  3.0,
+ umove   = 0,
+ vmove   = 0,
  v_t     =      7.0,
  l_h     =    100.0,
  lhref1  =    100.0,
