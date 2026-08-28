@@ -2761,6 +2761,18 @@
                 restart_hail = .false.
       ENDIF
 
+      !  If hail trajectories are on but the restart file came from a run
+      !  with ihailtraj=0, then hailtrajtim in that file is the "never"
+      !  sentinel (1.0d60) that param.F assigns when ihailtraj.le.0.
+      !  Reset it so hail output starts from the restart time.
+      IF( ihailtraj.eq.1 .and. restarted .and. (.not.restart_hail) )THEN
+        hailtrajtim = mtime
+        haildata(:,hailtime) = mtime
+        if(dowr) write(outfile,*)
+        if(dowr) write(outfile,*) '  Starting hail trajectories from a restart'
+        if(dowr) write(outfile,*) '  file that had none.  hailtrajtim = ',hailtrajtim
+        if(dowr) write(outfile,*)
+      ENDIF
 
       IF( dodomaindiag )THEN
         IF( restarted .and. diagfrq.gt.1.0e-6 )THEN
@@ -3126,6 +3138,7 @@
         doazimwrite = .false.
         dohifrqwrite = .false.
         if( .not. restart_prcl ) doprclout = .true.
+        if( ihailtraj.eq.1 .and. (.not.restart_hail) ) dohailout = .true.
       ENDIF
 
 
@@ -3216,9 +3229,7 @@
 
         dohailout  =  .false.
         if( ihailtraj.eq.1 )then
-           !if (mtime.ge.hail_start) THEN
               if( (mtime+dbldt).ge.(hailtrajtim-0.1d0*dbldt) .or. hailfrq.lt.0.0 ) dohailout  =  .true.
-           !endif
         endif
 
         dorad = .false.
@@ -4435,7 +4446,7 @@
         dostat      = .false.
         dowriteout  = .false.
         doprclout   = .false.
-                dohailout   = .false.
+        dohailout   = .false.
         dotdwrite   = .false.
         doazimwrite = .false.
         dohifrqwrite = .false.
